@@ -1,5 +1,5 @@
 # Default-Probabilty-Prediction
-**Objective** :  To predict the *probability* that a customer/individual does not pay back their credit card balance amount in the *future* based on their &emsp;&emsp;&emsp;monthly customer profile. The target binary variable is calculated by observing 18 months performance window after the latest credit card statement, and if the customer does not pay due amount in 120 days after their latest statement date it is considered a default event.
+**Objective** :  To predict the *probability* that a customer/individual does not pay back their credit card balance amount in the *future* based on their &emsp;&emsp;&emsp;monthly customer profile. The target binary variable is calculated by observing 18 months performance window after the latest credit&emsp;&emsp;&emsp; card statement, and if the customer does not pay due amount in 120 days after their latest statement date it is considered a default event.
 
 **Data sets** : There are a total of three *normalized* data sets namely -<br>
 &emsp;&emsp;&emsp;1 - test_data.csv (33.82 GB) - corresponding test data and objective is to predict the target label for each 'customer_ID' <br>
