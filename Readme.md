@@ -7,14 +7,14 @@
             3 - train_labels.csv (30.75 GB) - target 'label' for each 'customer_ID' <br>
 
 **Variable Description** :<br>
-            D_* = Delinquency variables<br>
-            S_* = Spend variables<br>
-            P_* = Payment variables<br>
-            B_* = Balance variables<br>
-            R_* = Risk variables<br>
+            D_* = Delinquency variables <br>
+            S_* = Spend variables <br>
+            P_* = Payment variables <br>
+            B_* = Balance variables <br>
+            R_* = Risk variables <br>
 
-Note : Some of the variable/predictors are of categorical type -
-            ['B_30', 'B_38', 'D_114', 'D_116', 'D_117', 'D_120', 'D_126', 'D_63', 'D_64', 'D_66', 'D_68']
+**_Note_** : Some of the variable/predictors are of categorical type -<br>
+            ['B_30', 'B_38', 'D_114', 'D_116', 'D_117', 'D_120', 'D_126', 'D_63', 'D_64', 'D_66', 'D_68']<br>
 
-Output : The result of the model has to be provided as a csv file in the format which contains only 'two columns' as :
-            | Customer_ID  |  Probabilty |  
+**Output** : The result of the model has to be provided as a csv file in the format which contains only 'two columns' as :<br>
+            | Customer_ID  |  Probabilty |  <br>
