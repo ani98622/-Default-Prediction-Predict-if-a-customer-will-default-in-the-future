@@ -3,7 +3,8 @@
 &emsp;&emsp;&emsp; default  event.;
 
 **Data sets** : There are a total of three *normalized* data sets namely -<br>
-&emsp;&emsp;&emsp;1 - test_data.feather (2.74 GB) - corresponding test data and objective is to predict the target label for each 'customer_ID' <br>
+&emsp;&emsp;&emsp;1 - test_data.feather (2.74 GB) - corresponding test data and objective is to predict the target label <br>
+&emsp;&emsp;&emsp; for each 'customer_ID' <br>
 &emsp;&emsp;&emsp;2 - train_data.feather (1.33 GB) - training data with 'multiple statement dates' per customer_ID <br>
 &emsp;&emsp;&emsp;3 - train_labels.csv (29.3 MB) - target 'label' for each 'customer_ID' <br>
 
