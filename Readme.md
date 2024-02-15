@@ -22,4 +22,4 @@
 **Output** : The result of the model has to be provided as a csv file in the format which contains only 'two columns' as :<br>
 &emsp;&emsp;&emsp; | Customer_ID  |  Probabilty |  <br>
 
-## Reference of WoE and IV : <href> file:///D:/Project%20 %20Credit%20Score%20Prediction/Weight%20of%20Evidence%20(WOE)%20and%20Information%20Value%20(IV)%20Explained.html
+### Reference of WoE and IV : <href> https://www.listendata.com/2015/03/weight-of-evidence-woe-and-information.html
