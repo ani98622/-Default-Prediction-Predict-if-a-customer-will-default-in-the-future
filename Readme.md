@@ -23,3 +23,5 @@
 &emsp;&emsp;&emsp; | Customer_ID  |  Probabilty |  <br>
 
 #### Reference of WoE and IV : <href> https://www.listendata.com/2015/03/weight-of-evidence-woe-and-information.html
+#### Optbinning : <href> https://gnpalencia.org/optbinning/
+#### Conversion of .csv to .feather : <href> https://www.kaggle.com/datasets/seefun/amex-default-prediction-feather
