@@ -1,6 +1,6 @@
 from src.Credit_Defaultor_Prediction.logger import logging
 from src.Credit_Defaultor_Prediction.exception import CustomException
-from src.Credit_Defaultor_Prediction.components.data_ingestion import DataIngestionConfig
+from src.Credit_Defaultor_Prediction.components.data_ingestion import DataIngestion
 import sys
 
 
@@ -10,6 +10,7 @@ if __name__=="__main__":
     try:
         data_ingestion = DataIngestion()
         data_ingestion.initiate_data_ingestion
+        
        
     except Exception as e:
         logging.info("Custom Exception")
