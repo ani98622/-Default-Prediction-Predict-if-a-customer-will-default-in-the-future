@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-## Note :  the repository is under work
-=======
 ## Note : The repository work is under proces. Please give a look to "Source Code" file till then.
->>>>>>> a7e7e317f8d63e0a4194337ea877837a81dd19c7
+
 # Default-Probabilty-Prediction
 **Objective** :  To predict the *probability* that a customer/individual does not pay back their credit card balance <br>&emsp;&emsp;&emsp; amount in the *future* based on their monthly customer profile. The target binary variable is calculated <br>&emsp;&emsp;&emsp; by observing 18 months performance window after the latest credit card statement, and if the <br> &emsp;&emsp;&emsp; customer does not pay due amount in 120 days after their latest statement date it is considered a <br>
 &emsp;&emsp;&emsp; default  event.;
