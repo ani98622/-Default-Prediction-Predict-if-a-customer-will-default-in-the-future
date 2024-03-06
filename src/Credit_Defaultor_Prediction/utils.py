@@ -1,7 +1,7 @@
 import os
 import sys
-from src.mlproject.exception import CustomException
-from src.mlproject.logger import logging
+from src.Credit_Defaultor_Prediction.exception import CustomException
+from src.Credit_Defaultor_Prediction.logger import logging
 import pandas as pd
 from dotenv import load_dotenv
 # from sklearn.model_selection import GridSearchCV
