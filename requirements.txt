@@ -1,9 +1,14 @@
 numpy
 pandas 
 optbinning
-sklearn
 matplotlib
 matplotlib_venn
 seaborn
 tqdm
+pymysql
+mysql-connector-python
+python-dotenv
+catboost
+xgboost  
+
 # -e .
