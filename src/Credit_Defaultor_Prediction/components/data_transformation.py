@@ -48,7 +48,7 @@ class DataTransformation:
 
             # IV score claculation for categorical and numerical type of data
             iv_dict = {}
-            for _ in train_cols: # what is this tqdm doing here?
+            for _ in tqdm(train_cols): # what is this tqdm doing here?
                 if _ in categorical :
                     ob = optbinning.OptimalBinning(dtype = 'categorical')
                     ob.fit(train[_],train['target'])
@@ -114,7 +114,7 @@ class DataTransformation:
                 obj=preprocessing_obj
             )
 
-            return (X_train, y_train, X_cv, y_cv , X_test, file_path  )
+            return (X_train, y_train, X_cv, y_cv , X_test, file_path)
         
         except Exception as e:
             raise CustomException(sys,e)
