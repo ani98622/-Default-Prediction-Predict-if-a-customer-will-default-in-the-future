@@ -20,8 +20,17 @@ class DataIngestion:
         try:
             # Reading Code  
             train,test,labels = read_data()
+            logging.info("Data Ingestion is completed")
+
+            os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
+            
+            labels.to_csv(self.ingestion_config.labels_data_path,index=False,header=True)
+            train.to_feather(self.ingestion_config.train_data_path,index=False,header=True)
+            test.to_feather(self.ingestion_config.test_data_path,index=False,header=True)
 
             logging.info("Data Ingestion is completed")
-            return train,test,labels
+
+            return ( self.ingestion_config.train_data_path, self.ingestion_config.test_data_path, self.ingestion_config.labels_data_path )
+
         except Exception as e:
             raise CustomException(e,sys)
