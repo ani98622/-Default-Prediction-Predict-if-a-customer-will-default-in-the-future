@@ -5,11 +5,7 @@ matplotlib
 matplotlib_venn
 seaborn
 tqdm
-pymysql
-mysql-connector-python
-python-dotenv
-catboost
-xgboost  
 scikit-learn
+optbinning
 
 # -e .
