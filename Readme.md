@@ -1,4 +1,5 @@
 # Default Probability Prediction
+**Note** :  For `EDA` and `Model Trainer` files visit `notebook` folder directly
 
 ## **Objective**
 Predict the probability of a customer defaulting on their credit card balance based on their monthly profile. 
