@@ -1,7 +1,7 @@
 import os
 import sys
 import pandas as pd
-
+import numpy as np
 import optbinnig
 from dataclasses import dataclass
 import seaborn as sns
