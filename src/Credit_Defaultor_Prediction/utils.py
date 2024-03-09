@@ -2,6 +2,7 @@ import os
 import sys
 from src.Credit_Defaultor_Prediction.exception import CustomException
 from src.Credit_Defaultor_Prediction.logger import logging
+from .exception import CustomException
 import pandas as pd
     
 def read_data():

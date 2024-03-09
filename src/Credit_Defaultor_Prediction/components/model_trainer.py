@@ -2,16 +2,15 @@ import os
 import sys
 import pandas as pd
 import numpy as np
-import optbinnig
+import optbinning
 from dataclasses import dataclass
 import seaborn as sns
+import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from src.Credit_Defaultor_Prediction.exception import CustomException
 from src.Credit_Defaultor_Prediction.logger import logging
 from src.Credit_Defaultor_Prediction.utils import save_object,evaluate_models
-from sklearn.linear_model import LinearRegression
 from sklearn import metrics
-
 
 @dataclass
 class ModelTrainerConfig:
@@ -22,11 +21,42 @@ class ModelTrainer:
         self.model_trainer_config=ModelTrainerConfig()
 
     def eval_metrics(self,actual, pred):
-        
-        # return rmse, mae, r2
+        return metrics.accuracy_score(actual,pred)
+         
+    def metric(y_true, y_pred, return_components=False) -> float:
+            """Amex metric for ndarrays"""
+        def top_four_percent_captured(df) -> float:
+            """Corresponds to the recall for a threshold of 4 %"""
+            df['weight'] = df['target'].apply(lambda x: 20 if x==0 else 1)
+            four_pct_cutoff = int(0.04 * df['weight'].sum())
+            df['weight_cumsum'] = df['weight'].cumsum()
+            df_cutoff = df.loc[df['weight_cumsum'] <= four_pct_cutoff]
+            return (df_cutoff['target'] == 1).sum() / (df['target'] == 1).sum()
 
-        
-    def initiate_model_trainer(self,train_array,test_array):
+        def weighted_gini(df) -> float:
+            df['weight'] = df['target'].apply(lambda x: 20 if x==0 else 1)
+            df['random'] = (df['weight'] / df['weight'].sum()).cumsum()
+            total_pos = (df['target'] * df['weight']).sum()
+            df['cum_pos_found'] = (df['target'] * df['weight']).cumsum()
+            df['lorentz'] = df['cum_pos_found'] / total_pos
+            df['gini'] = (df['lorentz'] - df['random']) * df['weight']
+            return df['gini'].sum()
+
+        def normalized_weighted_gini(df) -> float:
+            """Corresponds to 2 * AUC - 1"""
+            df2 = pd.DataFrame({'target': df.target, 'prediction': df.target})
+            df2.sort_values('prediction', ascending=False, inplace=True)
+            return weighted_gini(df) / weighted_gini(df2)
+
+        df = pd.DataFrame({'target': y_true.ravel(), 'prediction': y_pred.ravel()})
+        df.sort_values('prediction', ascending=False, inplace=True)
+        g = normalized_weighted_gini(df)
+        d = top_four_percent_captured(df)
+
+        if return_components: return g, d, 0.5 * (g + d)
+        return 0.5 * (g + d)
+         
+    def initiate_model_trainer(self,train_cols,categorical,train_data,cv_data,test,X_test,X_train,y_train,X_cv,Y_cv):
         try:
             logging.info("Split training and test input data")
             
@@ -50,12 +80,11 @@ class ModelTrainer:
             train_data['pred_prob'] = scorecard.predict_proba(X_train)[:,1]
             cv_data['pred_prob'] = scorecard.predict_proba(X_cv)[:,1]
 
-            train_score = metric(train_data['target'],train_data['pred_prob'])
-            cv_score = metric(cv_data['target'],cv_data['pred_prob'])
+            train_score = metrics(train_data['target'],train_data['pred_prob'])
+            cv_score = metrics(cv_data['target'],cv_data['pred_prob'])
 
             print("Training Score = ",train_score)
             print("CV score = ", cv_score)
-
 
             fpr_t , tpr_t , thresholds = metrics.roc_curve(y_train,train_data['pred_prob'])
             # returns three values i.e false +ve rate , true +ve rate , thresholds
@@ -142,10 +171,7 @@ class ModelTrainer:
             plt.title('Scorecard Dist.',fontweight = "bold",fontsize = 10)
             plt.xlabel('Score')
             plt.ylabel('Count')
-
-
             plt.figure(figsize = (15,9))
-
             plt.scatter(x = score,
                         y = cv_data['pred_prob'],
                         color = '#e82e60'
@@ -154,123 +180,18 @@ class ModelTrainer:
             plt.xlabel('Score')
             plt.ylabel('Prob')
 
-
             test['Probability'] = scorecard.predict_proba(X_test)[:,1]
             submit_df = test[['customer_ID','Probability']].copy()
             submit_df.to_csv("Submission.csv")
 
             temp = submit_df[submit_df['Probability']>0.5]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            return temp
+        except Exception as e:
+            raise CustomException(sys,e)
+        
          # Hidden
         
-    def metric(y_true, y_pred, return_components=False) -> float:
-            """Amex metric for ndarrays"""
-        def top_four_percent_captured(df) -> float:
-            """Corresponds to the recall for a threshold of 4 %"""
-            df['weight'] = df['target'].apply(lambda x: 20 if x==0 else 1)
-            four_pct_cutoff = int(0.04 * df['weight'].sum())
-            df['weight_cumsum'] = df['weight'].cumsum()
-            df_cutoff = df.loc[df['weight_cumsum'] <= four_pct_cutoff]
-            return (df_cutoff['target'] == 1).sum() / (df['target'] == 1).sum()
+    
 
-        def weighted_gini(df) -> float:
-            df['weight'] = df['target'].apply(lambda x: 20 if x==0 else 1)
-            df['random'] = (df['weight'] / df['weight'].sum()).cumsum()
-            total_pos = (df['target'] * df['weight']).sum()
-            df['cum_pos_found'] = (df['target'] * df['weight']).cumsum()
-            df['lorentz'] = df['cum_pos_found'] / total_pos
-            df['gini'] = (df['lorentz'] - df['random']) * df['weight']
-            return df['gini'].sum()
-
-        def normalized_weighted_gini(df) -> float:
-            """Corresponds to 2 * AUC - 1"""
-            df2 = pd.DataFrame({'target': df.target, 'prediction': df.target})
-            df2.sort_values('prediction', ascending=False, inplace=True)
-            return weighted_gini(df) / weighted_gini(df2)
-
-        df = pd.DataFrame({'target': y_true.ravel(), 'prediction': y_pred.ravel()})
-        df.sort_values('prediction', ascending=False, inplace=True)
-        g = normalized_weighted_gini(df)
-        d = top_four_percent_captured(df)
-
-        if return_components: return g, d, 0.5 * (g + d)
-        return 0.5 * (g + d)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-            model_report:dict = evaluate_models(X_train,y_train,X_test,y_test,models,params)
-
-
-            
-
-
-
-
-
-
-
-
-
-            logging.info(f"Best found model on both training and testing dataset")
-
-            save_object(
-                file_path=self.model_trainer_config.trained_model_file_path,
-                obj=best_model
-            )
-
-
-            r2_square = r2_score(y_test, predicted)
-            return r2_square
-
-        except Exception as e:
+    except Exception as e:
             raise CustomException(e,sys)
