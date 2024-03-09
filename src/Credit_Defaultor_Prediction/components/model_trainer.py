@@ -16,14 +16,14 @@ from sklearn import metrics
 class ModelTrainerConfig:
     trained_model_file_path=os.path.join("artifacts","model.pkl")
 
-class ModelTrainer:
+class ModelTrainers:
     def __init__(self):
         self.model_trainer_config=ModelTrainerConfig()
 
     def eval_metrics(self,actual, pred):
         return metrics.accuracy_score(actual,pred)
          
-    def metric(y_true, y_pred, return_components=False) -> float:
+    def metric(self, y_true, y_pred, return_components=False):
             """Amex metric for ndarrays"""
         def top_four_percent_captured(df) -> float:
             """Corresponds to the recall for a threshold of 4 %"""

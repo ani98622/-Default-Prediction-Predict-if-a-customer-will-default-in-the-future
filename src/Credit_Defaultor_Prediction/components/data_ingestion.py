@@ -30,7 +30,7 @@ class DataIngestion:
 
             logging.info("Data Ingestion is completed")
 
-            return ( self.ingestion_config.train_data_path, self.ingestion_config.test_data_path, self.ingestion_config.labels_data_path )
-
+            # return ( self.ingestion_config.train_data_path, self.ingestion_config.test_data_path, self.ingestion_config.labels_data_path )
+            return labels,train,test
         except Exception as e:
             raise CustomException(e,sys)

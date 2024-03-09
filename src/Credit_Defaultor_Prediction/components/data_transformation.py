@@ -114,7 +114,7 @@ class DataTransformation:
                 obj=preprocessing_obj
             )
 
-            return (X_train, y_train, X_cv, y_cv , X_test, file_path)
+            return (categorical,train_cols,X_train, y_train, X_cv, y_cv , X_test, file_path)
         
         except Exception as e:
             raise CustomException(sys,e)
