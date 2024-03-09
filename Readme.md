@@ -1,26 +1,28 @@
-# Default-Probabilty-Prediction
-**Objective** :  To predict the *probability* that a customer/individual does not pay back their credit card balance <br>&emsp;&emsp;&emsp; amount in the *future* based on their monthly customer profile. The target binary variable is calculated <br>&emsp;&emsp;&emsp; by observing 18 months performance window after the latest credit card statement, and if the <br> &emsp;&emsp;&emsp; customer does not pay due amount in 120 days after their latest statement date it is considered a <br>
-&emsp;&emsp;&emsp; default  event.;
+# Default Probability Prediction
 
-**Data sets** : There are a total of three *normalized* data sets namely -<br>
-&emsp;&emsp;&emsp;1 - test_data.feather (2.74 GB) - corresponding test data and objective is to predict the target label <br>
-&emsp;&emsp;&emsp; for each 'customer_ID' <br>
-&emsp;&emsp;&emsp;2 - train_data.feather (1.33 GB) - training data with 'multiple statement dates' per customer_ID <br>
-&emsp;&emsp;&emsp;3 - train_labels.csv (29.3 MB) - target 'label' for each 'customer_ID' <br>
+## **Objective**
+Predict the probability of a customer defaulting on their credit card balance based on their monthly profile. 
 
-**Variable Description** :<br>
-&emsp;&emsp;&emsp;D_* = Delinquency variables <br>
-&emsp;&emsp;&emsp;S_* = Spend variables <br>
-&emsp;&emsp;&emsp;P_* = Payment variables <br>
-&emsp;&emsp;&emsp;B_* = Balance variables <br>
-&emsp;&emsp;&emsp;R_* = Risk variables <br>
+## **Data Sets**
+- **test_data.feather (2.74 GB)**: Test data for predicting the target label for each 'customer_ID'.
+- **train_data.feather (1.33 GB)**: Training data with multiple statement dates per 'customer_ID'.
+- **train_labels.csv (29.3 MB)**: Target 'label' for each 'customer_ID'.
 
-**_Note_** : Some of the variable/predictors are of categorical type -<br>
-&emsp;&emsp;&emsp;['B_30', 'B_38', 'D_114', 'D_116', 'D_117', 'D_120', 'D_126', 'D_63', 'D_64', 'D_66', 'D_68']<br>
+## **Variable Description**
+- **D_***: Delinquency variables
+- **S_***: Spend variables
+- **P_***: Payment variables
+- **B_***: Balance variables
+- **R_***: Risk variables
 
-**Output** : The result of the model has to be provided as a csv file in the format which contains only 'two columns' as :<br>
-&emsp;&emsp;&emsp; | Customer_ID  |  Probabilty |  <br>
+Categorical predictors: ['B_30', 'B_38', 'D_114', 'D_116', 'D_117', 'D_120', 'D_126', 'D_63', 'D_64', 'D_66', 'D_68'].
 
-#### Reference of WoE and IV : <href> https://www.listendata.com/2015/03/weight-of-evidence-woe-and-information.html
-#### Optbinning : <href> https://gnpalencia.org/optbinning/
-#### Conversion of .csv to .feather : <href> https://www.kaggle.com/datasets/seefun/amex-default-prediction-feather
+## **Output Format**
+- CSV file with two columns:
+  - Customer_ID
+  - Probability
+
+## **References**
+- Delve into the concept of [Weight of Evidence (WoE) and Information Value (IV)](https://www.listendata.com/2015/03/weight-of-evidence-woe-and-information.html).
+- Explore advanced binning strategies with [Optbinning](https://gnpalencia.org/optbinning/).
+- Convert .csv to .feather format effortlessly using this [Kaggle Dataset](https://www.kaggle.com/datasets/seefun/amex-default-prediction-feather).
