@@ -1,5 +1,5 @@
 # Default Probability Prediction
-**Note** :  For `EDA` and `Model Selection` files visit `notebook` folder directly.
+**Note** :  For `EDA` and `Model Selection` files visit `notebook` folder directly. Also, `src\Credit_Defaultor_Prediction` contains all the source code. 
 
 ## **Objective**
 Predict the probability of a customer defaulting on their credit card balance based on their monthly profile. 
