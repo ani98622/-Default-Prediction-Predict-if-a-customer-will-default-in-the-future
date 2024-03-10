@@ -2,14 +2,13 @@ import os
 import sys
 from dataclasses import dataclass
 from tqdm import tqdm
-import numpy as np
+import numpy 
 import pandas as pd
 from sklearn import preprocessing
 from sklearn import feature_selection
 from sklearn.pipeline import Pipeline
-from optbinning import OptimalBinning
+import optbinning 
 from sklearn.model_selection import train_test_split
-from src.Credit_Defaultor_Prediction.utils import save_object
 from src.Credit_Defaultor_Prediction.exception import CustomException
 from src.Credit_Defaultor_Prediction.logger import logging
 
@@ -34,10 +33,8 @@ class DataTransformation:
             train = train.groupby("customer_ID").tail(1).reset_index(drop = True)
             test = test.groupby("customer_ID").tail(1).reset_index(drop = True)
 
-
             # merging with the targets values
             train = train.merge(labels, on = 'customer_ID', how = 'left')
-
 
             drop_cols = ['customer_ID','S_2','target']
             train_cols = [_ for _ in train.columns if _ not in drop_cols]
@@ -62,9 +59,7 @@ class DataTransformation:
             iv_df = pd.Series(iv_dict)
             iv_df.sort_values(ascending  = False, inplace = True )
 
-
             # Now, we will select the features for IV values > 0.5
-
             s_f = iv_df[iv_df > 0.5].index.values  
             categorical = [_ for _ in categorical if _ in s_f]
             train_cols = [_ for _ in train.columns if _ in s_f]
@@ -102,19 +97,9 @@ class DataTransformation:
 
             X_test = test[train_cols].copy()
 
-            logging.info("Applying Preprocessing on training and test dataframe")
+            logging.info("Data Transformation Done")
 
-            preprocessing_obj=self.get_data_transformer_object()
-
-            logging.info(f"Saved preprocessing object")
-
-            save_object(
-
-                file_path = self.data_transformation_config.preprocessor_obj_file_path,
-                obj=preprocessing_obj
-            )
-
-            return (categorical,train_cols,X_train, y_train, X_cv, y_cv , X_test, file_path)
+            return (categorical,train_cols,X_train, y_train, X_cv, y_cv , X_test )
         
         except Exception as e:
             raise CustomException(sys,e)

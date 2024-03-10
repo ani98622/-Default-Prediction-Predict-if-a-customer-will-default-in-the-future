@@ -17,7 +17,7 @@ class DataIngestion:
         self.ingestion_config = DataIngestionConfig()
         
     def initiate_data_ingestion(self):
-        try:
+        try :
             # Reading Code  
             train,test,labels = read_data()
             logging.info("Data Ingestion is completed")
@@ -29,8 +29,8 @@ class DataIngestion:
             test.to_feather(self.ingestion_config.test_data_path,index=False,header=True)
 
             logging.info("Data Ingestion is completed")
-
-            # return ( self.ingestion_config.train_data_path, self.ingestion_config.test_data_path, self.ingestion_config.labels_data_path )
+            
             return labels,train,test
-        except Exception as e:
+        
+        except Exception as e : 
             raise CustomException(e,sys)

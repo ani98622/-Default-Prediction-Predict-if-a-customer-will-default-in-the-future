@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from src.Credit_Defaultor_Prediction.exception import CustomException
 from src.Credit_Defaultor_Prediction.logger import logging
-from src.Credit_Defaultor_Prediction.utils import save_object,evaluate_models
 from sklearn import metrics
 
 @dataclass
@@ -24,7 +23,8 @@ class ModelTrainers:
         return metrics.accuracy_score(actual,pred)
          
     def metric(self, y_true, y_pred, return_components=False):
-            """Amex metric for ndarrays"""
+        """Amex metric for ndarrays"""
+
         def top_four_percent_captured(df) -> float:
             """Corresponds to the recall for a threshold of 4 %"""
             df['weight'] = df['target'].apply(lambda x: 20 if x==0 else 1)
@@ -158,7 +158,6 @@ class ModelTrainers:
             plt.xlabel("score")
             plt.legend()
             plt.show()
-
             # Distribution of scores
             plt.figure(figsize=(20,10))
 
@@ -186,12 +185,6 @@ class ModelTrainers:
 
             temp = submit_df[submit_df['Probability']>0.5]
             return temp
+        
         except Exception as e:
             raise CustomException(sys,e)
-        
-         # Hidden
-        
-    
-
-    except Exception as e:
-            raise CustomException(e,sys)

@@ -1,4 +1,4 @@
-from Credit_Defaultor_Prediction.components.model_trainer import ModelTrainers
+from src.Credit_Defaultor_Prediction.components.model_trainer import ModelTrainers
 from src.Credit_Defaultor_Prediction.logger import logging
 from src.Credit_Defaultor_Prediction.exception import CustomException
 from src.Credit_Defaultor_Prediction.components.data_ingestion import DataIngestion
@@ -11,7 +11,7 @@ if __name__=="__main__":
 
     try:
         data_ingestion = DataIngestion()
-        labels,train,test = data_ingestion.initiate_data_ingestion
+        labels,train,test = data_ingestion.initiate_data_ingestion()
        
         data_transformation = DataTransformation()
         (categorical,train_cols,X_train, y_train, X_cv, y_cv , X_test, file_path) = data_transformation.initiate_data_transformation()
