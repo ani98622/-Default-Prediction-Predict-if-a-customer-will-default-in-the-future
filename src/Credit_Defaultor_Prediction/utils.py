@@ -10,8 +10,7 @@ def read_data():
     try:
         train = pd.read_feather("notebook/data/test.feather")
         test = pd.read_feather("notebook/data/train.feather")
-        labels = pd.read_csv("notebook/data/labels.csv")
-                             
+        labels = pd.read_csv("notebook/data/labels.csv")  
         return train,test,labels
     
     except Exception as ex:

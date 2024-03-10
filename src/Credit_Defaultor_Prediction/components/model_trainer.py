@@ -43,7 +43,7 @@ class ModelTrainers:
             return df['gini'].sum()
 
         def normalized_weighted_gini(df) -> float:
-            """Corresponds to 2 * AUC - 1"""
+            """Corresponds to 2 * AUC - 1 """
             df2 = pd.DataFrame({'target': df.target, 'prediction': df.target})
             df2.sort_values('prediction', ascending=False, inplace=True)
             return weighted_gini(df) / weighted_gini(df2)

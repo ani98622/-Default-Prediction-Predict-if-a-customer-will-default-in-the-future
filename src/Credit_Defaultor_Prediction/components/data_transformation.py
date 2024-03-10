@@ -40,7 +40,6 @@ class DataTransformation:
             train_cols = [_ for _ in train.columns if _ not in drop_cols]
             
             categorical = ['B_30', 'B_38', 'D_114', 'D_116', 'D_117', 'D_120', 'D_126', 'D_63', 'D_64', 'D_66', 'D_68']
-            
             logging.info(f"Categorical Columns:{categorical}")
 
             # IV score claculation for categorical and numerical type of data

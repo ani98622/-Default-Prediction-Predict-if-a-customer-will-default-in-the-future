@@ -12,7 +12,6 @@ if __name__=="__main__":
     try:
         data_ingestion = DataIngestion()
         labels,train,test = data_ingestion.initiate_data_ingestion()
-       
         data_transformation = DataTransformation()
         (categorical,train_cols,X_train, y_train, X_cv, y_cv , X_test, file_path) = data_transformation.initiate_data_transformation()
 
